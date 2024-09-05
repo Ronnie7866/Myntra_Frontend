@@ -1,0 +1,110 @@
+/* Main container for the form */
+.formContainer {
+    max-width: 500px;
+    padding: 40px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.8s ease-in-out;
+    font-family: 'Roboto', sans-serif;
+    margin: 80px auto 50px;
+}
+
+/* Form Title Styling */
+.formTitle {
+    font-size: 24px;
+    font-weight: 600;
+    color: #ff3f6c; /* Myntra brand color */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+/* Form structure */
+.form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form group structure */
+.formGroup {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+/* Label styling */
+.label {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+
+/* Input styling with animated border */
+.input {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    transition: border 0.3s ease;
+    font-family: inherit;
+}
+
+/* Input animation on focus */
+.input:focus {
+    border-color: #ff3f6c;
+    box-shadow: 0 0 10px rgba(255, 63, 108, 0.2);
+    outline: none;
+}
+
+/* Submit button */
+.submitButton {
+    width: 100%;
+    padding: 15px;
+    background-color: #ff3f6c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-transform: uppercase;
+}
+
+/* Button hover animation */
+.submitButton:hover {
+    background-color: #ff1f56;
+    transform: scale(1.05);
+}
+
+/* Fade-in animation for the form container */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 600px) {
+    .formContainer {
+        padding: 20px;
+    }
+
+    .input {
+        font-size: 14px;
+    }
+
+    .submitButton {
+        padding: 12px;
+        font-size: 16px;
+    }
+}
