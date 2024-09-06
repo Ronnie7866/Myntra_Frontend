@@ -32,6 +32,10 @@ const Signup = () => {
           "Content-Type": "application/json",
         },
       );
+
+      // save the token in local storage
+      localStorage.setItem("token", response.data.token);
+
       console.log(response.data.token);
       console.log("Registration successful!");
       setSuccessMessage("Registration successfully!");

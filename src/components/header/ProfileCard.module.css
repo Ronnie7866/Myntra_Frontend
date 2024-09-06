@@ -1,0 +1,48 @@
+.card {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 250px;
+    z-index: 9999;
+    display: none; /* Hidden by default */
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.card.visible {
+    display: block; /* Show when visible */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu li {
+    margin-bottom: 10px;
+}
+
+.menu li:last-child {
+    margin-bottom: 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #282c3f;
+    font-size: 14px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #f54e77; /* Accent color on hover */
+}

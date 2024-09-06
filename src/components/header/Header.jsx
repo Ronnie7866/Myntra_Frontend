@@ -1,10 +1,21 @@
+import React, { useState } from "react";
 import { FcBusinesswoman, FcLike } from "react-icons/fc";
 import { FaShoppingBag } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ProfileCard from "./ProfileCard";
 
 export default function Header() {
   const bag = useSelector((store) => store.bag);
+  const [isProfileCardVisible, setIsProfileCardVisible] = useState(false);
+
+  const handleMouseEnter = () => {
+    setIsProfileCardVisible(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsProfileCardVisible(false);
+  };
 
   return (
     <header className="header-fix">
@@ -35,9 +46,22 @@ export default function Header() {
         />
       </div>
       <div className="action_bar">
-        <div className="action_container">
+        {/* Profile Container with hover detection */}
+        <div
+          className="action_container"
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          style={{ position: "relative" }}
+        >
           <FcBusinesswoman />
           <span className="action_name">Profile</span>
+
+          {/* Conditional rendering of ProfileCard */}
+          {isProfileCardVisible && (
+            <div style={{ position: "absolute", top: "100%", right: "0" }}>
+              <ProfileCard />
+            </div>
+          )}
         </div>
 
         <div className="action_container">

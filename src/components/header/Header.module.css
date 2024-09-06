@@ -1,0 +1,27 @@
+/* Add this to your existing CSS file */
+
+.action_container {
+    cursor: pointer; /* Changes cursor to pointer when hovering over the profile icon */
+}
+
+.card {
+    position: absolute;
+    top: 100%; /* Positions the card below the profile icon */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    width: 200px;
+    z-index: 9999;
+    display: none; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+    opacity: 0;
+}
+
+/* CSS for making the card visible when hovering over the profile icon */
+.profile_icon:hover + .card {
+    display: block;
+    opacity: 1;
+}

@@ -1,20 +1,41 @@
-/* src/components/InventoryForm.module.css */
-.inventoryContainer {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 40px;
-    background-color: #fff;
+.formContainer {
+    max-width: 500px;
+    background-color: #f9f9f9;
+    padding: 20px 30px;
     border-radius: 8px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    animation: fadeIn 0.8s ease-in-out;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease-in-out;
+    margin: 80px auto 40px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .title {
-    font-size: 28px;
     text-align: center;
-    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
     color: #333;
-    animation: bounceIn 1s;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.title::after {
+    content: '';
+    width: 50px;
+    height: 4px;
+    background-color: #ff3f6c;
+    display: block;
+    margin: 8px auto 0;
+    border-radius: 2px;
 }
 
 .form {
@@ -24,92 +45,91 @@
 
 .formGroup {
     margin-bottom: 20px;
+    position: relative;
 }
 
 .label {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
     margin-bottom: 8px;
     display: block;
-    color: #333;
+    transition: all 0.3s ease;
 }
 
 .input {
     width: 100%;
-    padding: 12px;
+    padding: 10px 15px;
     font-size: 16px;
-    border: 1px solid #ddd;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    outline: none;
     transition: border-color 0.3s ease;
+    background-color: #fff;
 }
 
 .input:focus {
-    border-color: #007bff;
+    border-color: #ff3f6c;
+    background-color: #fff5f5;
+}
+
+.input:hover {
+    border-color: #ff3f6c;
+}
+
+.select {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    transition: border-color 0.3s ease;
+    background-color: #fff;
+}
+
+.select:focus {
+    border-color: #ff3f6c;
+    background-color: #fff5f5;
 }
 
 .submitButton {
-    padding: 12px;
+    background-color: #ff3f6c;
+    color: white;
     font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
+    font-weight: bold;
+    padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-    animation: pulse 1s infinite;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .submitButton:hover {
-    background-color: #0056b3;
+    background-color: #d63049;
+    transform: translateY(-2px);
 }
 
-.error {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 10px;
+.submitButton:active {
+    background-color: #d63049;
 }
 
 .success {
     color: #28a745;
     font-size: 14px;
     margin-top: 10px;
+    text-align: center;
 }
 
-/* Keyframes for animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.error {
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
 }
 
-@keyframes bounceIn {
-    0% {
-        opacity: 0;
-        transform: scale(0.3);
-    }
-    50% {
-        opacity: 1;
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.05);
-    }
-    100% {
-        transform: scale(1);
+@media (max-width: 600px) {
+    .formContainer {
+        padding: 15px 20px;
     }
 }

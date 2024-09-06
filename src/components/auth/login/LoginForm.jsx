@@ -31,6 +31,10 @@ const LoginForm = () => {
           },
         },
       );
+
+      // save token in localStorage
+      localStorage.setItem("token", response.data.token);
+
       setSuccessMessage("Login successful!");
       console.log("Login successful:", response.data);
     } catch (error) {

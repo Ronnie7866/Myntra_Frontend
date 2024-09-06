@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./CategoryForm.module.css";
+import axiosObject from "../auth/axiosInstance.js";
 
 const CategoryForm = () => {
   const [categoryData, setCategoryData] = useState({
@@ -23,15 +24,7 @@ const CategoryForm = () => {
     setSuccessMessage("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/categories",
-        categoryData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
+      const response = await axiosObject.post("/category", categoryData);
       setSuccessMessage("Category saved successfully!");
       console.log("Category saved:", response.data);
     } catch (error) {

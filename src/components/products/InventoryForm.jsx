@@ -1,99 +1,96 @@
-// src/components/InventoryForm.jsx
-import React, { useState } from "react";
-import axios from "axios";
-import styles from "./InventoryForm.module.css";
+import React, { useState, useEffect } from "react";
+import axiosObject from "../auth/axiosInstance.js";
+import styles from "./InventoryForm.module.css"; // Assuming you're using CSS modules
 
 const InventoryForm = () => {
-  const [inventoryData, setInventoryData] = useState({
+  const [formData, setFormData] = useState({
     productId: "",
     quantity: "",
-    location: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [products, setProducts] = useState([]); // To store available products
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
+
+  // Fetch products for the dropdown list
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axiosObject.get("/products"); // Fetch products
+        setProducts(response.data);
+      } catch (err) {
+        console.error("Error fetching products:", err);
+      }
+    };
+
+    fetchProducts();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInventoryData({ ...inventoryData, [name]: value });
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage("");
-    setSuccessMessage("");
-
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/inventory",
-        inventoryData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        },
-      );
-      setSuccessMessage("Inventory updated successfully!");
-      console.log("Inventory updated:", response.data);
-    } catch (error) {
-      setErrorMessage("An error occurred. Please try again.");
-      console.error("Error updating inventory:", error);
+      await axiosObject.post("/inventory", formData); // Send inventory data to backend
+      setSuccess("Inventory updated successfully!");
+      setError(null);
+      setFormData({
+        productId: "",
+        quantity: "",
+      });
+    } catch (err) {
+      setError("Failed to update inventory. Please try again.");
+      setSuccess(null);
     }
   };
 
   return (
-    <div className={styles.inventoryContainer}>
+    <div className={styles.formContainer}>
       <h2 className={styles.title}>Update Inventory</h2>
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
+        {/* Product Dropdown */}
         <div className={styles.formGroup}>
-          <label htmlFor="productId" className={styles.label}>
-            Product ID
-          </label>
-          <input
-            type="text"
-            id="productId"
+          <label className={styles.label}>Product</label>
+          <select
             name="productId"
-            value={inventoryData.productId}
-            onChange={handleChange}
             className={styles.input}
+            value={formData.productId}
+            onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select Product</option>
+            {products.map((product) => (
+              <option key={product.id} value={product.id}>
+                {product.name}
+              </option>
+            ))}
+          </select>
         </div>
+
+        {/* Quantity Field */}
         <div className={styles.formGroup}>
-          <label htmlFor="quantity" className={styles.label}>
-            Quantity
-          </label>
+          <label className={styles.label}>Quantity</label>
           <input
             type="number"
-            id="quantity"
             name="quantity"
-            value={inventoryData.quantity}
-            onChange={handleChange}
             className={styles.input}
-            required
-          />
-        </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="location" className={styles.label}>
-            Location
-          </label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={inventoryData.location}
+            value={formData.quantity}
             onChange={handleChange}
-            className={styles.input}
             required
           />
         </div>
 
+        {/* Submit Button */}
         <button type="submit" className={styles.submitButton}>
-          Submit
+          Update Inventory
         </button>
 
-        {errorMessage && <p className={styles.error}>{errorMessage}</p>}
-        {successMessage && <p className={styles.success}>{successMessage}</p>}
+        {/* Error and Success Messages */}
+        {error && <div className={styles.error}>{error}</div>}
+        {success && <div className={styles.success}>{success}</div>}
       </form>
     </div>
   );

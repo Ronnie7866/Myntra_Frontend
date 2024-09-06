@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axiosObject from "../auth/axiosInstance.js";
 import styles from "./ProductForm.module.css";
 
@@ -11,9 +11,24 @@ const ProductForm = () => {
     stockQuantity: "",
     averageRating: "",
     availability: "",
+    categoryId: "",
   });
+  const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axiosObject.get("/category");
+        setCategories(response.data);
+      } catch (err) {
+        setError(err.message);
+        console.log("Error Occured ", err);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,6 +49,7 @@ const ProductForm = () => {
         stockQuantity: "",
         averageRating: "",
         availability: "",
+        categoryId: "",
       });
     } catch (err) {
       setError("Failed to add product. Please try again.");
@@ -45,6 +61,7 @@ const ProductForm = () => {
     <div className={styles.formContainer}>
       <h2 className={styles.title}>Add Product</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
+        {/* Name Field */}
         <div className={styles.formGroup}>
           <label className={styles.label}>Name</label>
           <input
@@ -56,6 +73,8 @@ const ProductForm = () => {
             required
           />
         </div>
+
+        {/* Price Field */}
         <div className={styles.formGroup}>
           <label className={styles.label}>Price</label>
           <input
@@ -67,6 +86,8 @@ const ProductForm = () => {
             required
           />
         </div>
+
+        {/* Description Field */}
         <div className={styles.formGroup}>
           <label className={styles.label}>Description</label>
           <textarea
@@ -77,6 +98,8 @@ const ProductForm = () => {
             required
           />
         </div>
+
+        {/* Image URL Field */}
         <div className={styles.formGroup}>
           <label className={styles.label}>Image URL</label>
           <input
@@ -88,6 +111,8 @@ const ProductForm = () => {
             required
           />
         </div>
+
+        {/* Stock Quantity Field */}
         <div className={styles.formGroup}>
           <label className={styles.label}>Stock Quantity</label>
           <input
@@ -99,6 +124,8 @@ const ProductForm = () => {
             required
           />
         </div>
+
+        {/* Average Rating Field */}
         <div className={styles.formGroup}>
           <label className={styles.label}>Average Rating</label>
           <input
@@ -113,6 +140,8 @@ const ProductForm = () => {
             required
           />
         </div>
+
+        {/* Availability Field */}
         <div className={styles.formGroup}>
           <label className={styles.label}>Availability</label>
           <select
@@ -123,13 +152,36 @@ const ProductForm = () => {
             required
           >
             <option value="">Select Availability</option>
-            <option value="IN_STOCK">In Stock</option>
-            <option value="OUT_OF_STOCK">Out of Stock</option>
+            <option value="AVAILABLE">In Stock</option>
+            <option value="UNAVAILABLE">Out of Stock</option>
           </select>
         </div>
+
+        {/* Category Dropdown */}
+        <div className={styles.formGroup}>
+          <label className={styles.label}>Category</label>
+          <select
+            name="categoryId"
+            className={styles.input}
+            value={formData.categoryId}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map((category) => (
+              <option key={category.id} value={category.id}>
+                {category.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Submit Button */}
         <button type="submit" className={styles.submitButton}>
           Add Product
         </button>
+
+        {/* Error and Success Messages */}
         {error && <div className={styles.error}>{error}</div>}
         {success && <div className={styles.success}>{success}</div>}
       </form>

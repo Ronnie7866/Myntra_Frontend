@@ -1,95 +1,96 @@
-/* src/components/products/ProductForm.module.css */
+
 .formContainer {
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 20px;
     background-color: #ffffff;
+    padding: 40px;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.6s ease-in-out;
-    margin-top: 80px;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
 .title {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #333;
     text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333333;
+    margin-bottom: 20px;
+    animation: slideIn 0.8s ease-in-out;
 }
 
 .form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
 .formGroup {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: 600;
-    color: #555;
+    font-size: 1rem;
+    color: #666666;
+    margin-bottom: 10px;
+    display: inline-block;
+    transition: color 0.3s;
 }
 
-.input {
+.input,
+textarea,
+select {
     width: 100%;
     padding: 12px;
-    font-size: 16px;
-    border: 1px solid #ddd;
+    border: 1px solid #dddddd;
     border-radius: 8px;
-    transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.input:focus {
-    border-color: #007bff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    font-size: 1rem;
+    color: #333333;
     outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-textarea.input {
-    resize: vertical;
-    height: 100px;
+.input:focus,
+textarea:focus,
+select:focus {
+    border-color: #ff3f6c;
+    box-shadow: 0 0 5px rgba(255, 63, 108, 0.5);
 }
 
-select.input {
-    cursor: pointer;
+textarea {
+    min-height: 100px;
 }
 
 .submitButton {
-    padding: 12px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #007bff;
+    background-color: #ff3f6c;
+    color: #ffffff;
     border: none;
     border-radius: 8px;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease;
 }
 
 .submitButton:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
-
-.submitButton:active {
-    transform: scale(1.02);
+    background-color: #ff577d;
 }
 
 .error, .success {
-    font-size: 14px;
-    margin-top: 10px;
     text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .error {
-    color: #dc3545;
+    color: black;
 }
 
 .success {
-    color: #28a745;
+    background-color: #4caf50;
 }
 
 @keyframes fadeIn {
@@ -101,9 +102,9 @@ select.input {
     }
 }
 
-@keyframes slideUp {
+@keyframes slideIn {
     from {
-        transform: translateY(20px);
+        transform: translateY(-20px);
         opacity: 0;
     }
     to {

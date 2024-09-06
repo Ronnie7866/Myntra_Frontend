@@ -1,4 +1,4 @@
-import Header from "../components/Header.jsx";
+import Header from "../components/header/Header.jsx";
 import Footer from "../components/Footer.jsx";
 import { Outlet } from "react-router-dom";
 import FetchItems from "../components/FetchItems.jsx";
