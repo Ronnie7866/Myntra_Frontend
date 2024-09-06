@@ -1,15 +1,16 @@
 import React from "react";
 import styles from "./ProfileCard.module.css";
+import { Link } from "react-router-dom";
 
 const ProfileCard = () => {
   return (
     <div className={`${styles.card} ${styles.visible}`}>
       <ul className={styles.menu}>
         <li>
-          <a href="/login">Login</a>
+          <Link to="/login">Login</Link>
         </li>
         <li>
-          <a href="/signup">Signup</a>
+          <Link to="/signup">Signup</Link>
         </li>
         <li>
           <a href="/orders">Your Orders</a>

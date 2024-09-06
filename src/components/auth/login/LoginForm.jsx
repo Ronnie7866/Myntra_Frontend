@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import styles from "./LoginForm.module.css";
+import { Link } from "react-router-dom";
 
 const LoginForm = () => {
   const [formData, setFormData] = useState({
@@ -87,6 +88,10 @@ const LoginForm = () => {
         {errorMessage && <p className={styles.error}>{errorMessage}</p>}
         {successMessage && <p className={styles.success}>{successMessage}</p>}
       </form>
+      <div className={styles.createAccountSection}>
+        <p>Don't have an account</p>
+        <Link to="/signup">Create New Account</Link>
+      </div>
     </div>
   );
 };

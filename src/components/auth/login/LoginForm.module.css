@@ -5,7 +5,7 @@
     border-radius: 8px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     animation: fadeIn 0.8s ease-in-out;
-    margin: 80px auto 0;
+    margin: 10px auto;
 }
 
 .title {
@@ -89,4 +89,25 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.createAccountSection {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.createAccountSection p {
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+.createAccountSection a {
+    color: #ff3f6c;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.createAccountSection a:hover {
+    text-decoration: underline;
 }
