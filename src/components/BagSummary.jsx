@@ -6,7 +6,6 @@ export default function BagSummary() {
   const items = useSelector((state) => state.items);
 
   const finalItems = items.filter((item) => bagItemIds.includes(item.id));
-  console.log(finalItems);
 
   const CONVENIENCE_FEES = 99;
   let totalItem = bagItemIds.length;

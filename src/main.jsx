@@ -10,9 +10,11 @@ import { Provider } from "react-redux";
 import myntraStore from "./store/index.js";
 import Signup from "./components/auth/signup/Signup.jsx";
 import LoginForm from "./components/auth/login/LoginForm.jsx";
-import ProductForm from "./components/products/ProductForm.jsx";
-import CategoryForm from "./components/products/CategoryForm.jsx";
-import InventoryForm from "./components/products/InventoryForm.jsx";
+import ProductForm from "./components/auth/admin/products/ProductForm.jsx";
+import CategoryForm from "./components/auth/admin/products/CategoryForm.jsx";
+import InventoryForm from "./components/auth/admin/products/InventoryForm.jsx";
+import PrivateRoute from "./routes/PrivateRoute.jsx";
+import AdminDashboard from "./components/auth/admin/adminDashboard/AdminDashboard.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,9 +25,41 @@ const router = createBrowserRouter([
       { path: "/bag", element: <Bag /> },
       { path: "/signup", element: <Signup /> },
       { path: "/login", element: <LoginForm /> },
-      { path: "/product-form", element: <ProductForm /> },
-      { path: "/category-form", element: <CategoryForm /> },
-      { path: "/inventory-form", element: <InventoryForm /> },
+
+      //Admin-specific routes protected by role
+      {
+        path: "/admin-dashboard",
+        element: (
+          <PrivateRoute requireRole="ADMIN">
+            <AdminDashboard />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/product-form",
+        element: (
+          <PrivateRoute requireRole={"ADMIN"}>
+            <ProductForm />
+          </PrivateRoute>
+        ),
+      },
+
+      {
+        path: "/category-form",
+        element: (
+          <PrivateRoute requireRole={"ADMIN"}>
+            <CategoryForm />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/inventory-form",
+        element: (
+          <PrivateRoute requireRole={"ADMIN"}>
+            <InventoryForm />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
 ]);

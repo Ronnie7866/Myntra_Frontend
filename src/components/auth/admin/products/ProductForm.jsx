@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import axiosObject from "../auth/axiosInstance.js";
+import axiosObject from "../../axiosInstance.js";
 import styles from "./ProductForm.module.css";
 
 const ProductForm = () => {
@@ -38,7 +38,7 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosObject.post("/products", formData); // Use the axios instance
+      await axiosObject.post("/products/admin", formData); // Use the axios instance
       setSuccess("Product added successfully!");
       setError(null);
       setFormData({

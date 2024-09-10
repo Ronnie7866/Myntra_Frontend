@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import axiosObject from "../auth/axiosInstance.js";
+import axiosObject from "../../axiosInstance.js";
 import styles from "./InventoryForm.module.css"; // Assuming you're using CSS modules
 
 const InventoryForm = () => {
@@ -16,7 +16,7 @@ const InventoryForm = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axiosObject.get("/products"); // Fetch products
+        const response = await axiosObject.get("/products/admin"); // Fetch products
         setProducts(response.data);
       } catch (err) {
         console.error("Error fetching products:", err);

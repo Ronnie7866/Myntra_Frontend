@@ -1,0 +1,39 @@
+.dashboardContainer {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.nav {
+    background-color: #f8f9fa;
+    padding: 20px;
+}
+
+.navList {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+}
+
+.navList li {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-right: 15px;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s ease;
+}
+
+.navList li:hover {
+    border-bottom: 2px solid #007bff;
+}
+
+.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+}
+
+.content {
+    flex-grow: 1;
+    padding: 20px;
+}
