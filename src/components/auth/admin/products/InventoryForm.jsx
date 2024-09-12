@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import axiosObject from "../../axiosInstance.js";
-import styles from "./InventoryForm.module.css"; // Assuming you're using CSS modules
+import styles from "./InventoryForm.module.css";
+import axiosInstance from "../../../utils/api.js"; // Assuming you're using CSS modules
 
 const InventoryForm = () => {
   const [formData, setFormData] = useState({
-    productId: "",
-    quantity: "",
+    productId: "", // getting this in long
+    quantity: "", // getting this in int from backend
   });
 
   const [products, setProducts] = useState([]); // To store available products
@@ -16,7 +16,7 @@ const InventoryForm = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axiosObject.get("/products/admin"); // Fetch products
+        const response = await axiosInstance.get("/api/products"); // Fetch products
         setProducts(response.data);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -33,8 +33,12 @@ const InventoryForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Convert productId and quantity to numbers
+    const { productId, quantity } = formData;
     try {
-      await axiosObject.post("/inventory", formData); // Send inventory data to backend
+      await axiosInstance.post(
+        `/api/inventory/${Number(productId)}?stock=${Number(quantity)}`,
+      ); // Send inventory data to backend
       setSuccess("Inventory updated successfully!");
       setError(null);
       setFormData({

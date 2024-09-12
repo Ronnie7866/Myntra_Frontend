@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { axiosInstance } from "../../components/utils/api.js";
+import axiosInstance from "../../components/utils/api.js";
 
 export const loginUser = createAsyncThunk(
   "auth/login",
@@ -31,7 +31,7 @@ export const signupUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   localStorage.removeItem("token");
-  return;
+  window.location.href = "/login";
 });
 
 const authSlice = createSlice({

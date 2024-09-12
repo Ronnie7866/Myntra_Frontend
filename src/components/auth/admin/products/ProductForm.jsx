@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axiosObject from "../../axiosInstance.js";
 import styles from "./ProductForm.module.css";
+import axiosInstance from "../../../utils/api.js";
 
 const ProductForm = () => {
   const [formData, setFormData] = useState({
@@ -20,7 +20,7 @@ const ProductForm = () => {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await axiosObject.get("/category");
+        const response = await axiosInstance.get("/api/category");
         setCategories(response.data);
       } catch (err) {
         setError(err.message);
@@ -38,7 +38,7 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosObject.post("/products/admin", formData); // Use the axios instance
+      await axiosInstance.post("/api/products", formData); // Use the axios instance
       setSuccess("Product added successfully!");
       setError(null);
       setFormData({
