@@ -22,10 +22,7 @@ const CategoryForm = () => {
     setSuccessMessage("");
 
     try {
-      const response = await axiosInstance.post(
-        "/api/category/admin",
-        categoryData,
-      );
+      const response = await axiosInstance.post("/api/category", categoryData);
       setSuccessMessage("Category saved successfully!");
     } catch (error) {
       setErrorMessage("An error occurred. Please try again.");
