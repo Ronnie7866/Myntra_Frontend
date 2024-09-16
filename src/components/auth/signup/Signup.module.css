@@ -8,7 +8,7 @@
     text-align: center;
     animation: fadeIn 0.8s ease-in-out;
     font-family: 'Roboto', sans-serif;
-    margin: 80px auto 50px;
+    margin: 0px auto 50px;
 }
 
 /* Form Title Styling */
@@ -107,4 +107,85 @@
         padding: 12px;
         font-size: 16px;
     }
+}
+
+
+/* Define the base styles for the buttons */
+.button {
+    background-color: #4285F4; /* Google Blue */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    margin: 5px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Add a gradient overlay effect on hover */
+.button:hover {
+    background-color: #357ae8;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.button:focus {
+    outline: 2px solid #357ae8;
+    outline-offset: 2px;
+}
+
+/* Add a pulse animation on click */
+.button:active {
+    background-color: #2a56c6;
+    transform: scale(0.98);
+}
+
+/* Add a ripple effect on click */
+.button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s, height 0.4s;
+    pointer-events: none;
+}
+
+.button:active:after {
+    width: 0;
+    height: 0;
+    transition: 0s;
+}
+
+/* Specific styles for the Google button */
+.googleButton {
+    background-color: #4285F4;
+}
+
+/* Specific styles for the GitHub button */
+.githubButton {
+    background-color: #333;
+}
+
+/* Add a hover effect for GitHub button */
+.githubButton:hover {
+    background-color: #444;
+}
+
+.OAuthButtonContainer {
+    margin-top: 1.5rem;
+    /*display: flex;*/
+    /*gap: 1rem;*/
+    /*justify-content: center;*/
+}
+
+.button svg {
+    margin-right: 0.5rem;
 }

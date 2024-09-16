@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import styles from "./Signup.module.css";
 import axios from "axios"; // Import CSS module
+import { FcGoogle } from "react-icons/fc";
+import { FaGithub } from "react-icons/fa";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -16,6 +18,13 @@ const Signup = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleGoogleLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/google";
+  };
+  const handleGithubLogin = () => {
+    window.location.href = "http://localhost:8080/oauth2/authorization/github";
   };
 
   const handleSubmit = async (e) => {
@@ -111,6 +120,22 @@ const Signup = () => {
           Register
         </button>
       </form>
+      <div className={styles.OAuthButtonContainer}>
+        <button
+          className={`${styles.button} ${styles.googleButton}`}
+          onClick={handleGoogleLogin}
+        >
+          <FcGoogle />
+          Login with Google
+        </button>
+        <button
+          className={`${styles.button} ${styles.githubButton}`}
+          onClick={handleGithubLogin}
+        >
+          <FaGithub />
+          Login with Github
+        </button>
+      </div>
     </div>
   );
 };

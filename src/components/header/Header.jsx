@@ -23,7 +23,7 @@ export default function Header() {
         <Link to="/">
           <img
             className="myntra_home"
-            src="images/myntra_logo.webp"
+            src="/images/myntra_logo.webp"
             alt="Myntra Home"
           />
         </Link>

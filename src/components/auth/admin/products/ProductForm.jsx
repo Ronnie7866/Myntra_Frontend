@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductForm.module.css";
 import axiosInstance from "../../../utils/api.js";
+import { useNavigate } from "react-router-dom"; // Import for navigation after product creation
 
 const ProductForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
     description: "",
-    imageUrl: "",
     stockQuantity: "",
     averageRating: "",
     availability: "",
@@ -16,6 +16,7 @@ const ProductForm = () => {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const navigate = useNavigate(); // For navigation
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -23,8 +24,8 @@ const ProductForm = () => {
         const response = await axiosInstance.get("/api/category");
         setCategories(response.data);
       } catch (err) {
-        setError(err.message);
-        console.log("Error Occured ", err);
+        setError("Failed to fetch categories.");
+        console.log("Error Occurred: ", err);
       }
     };
     fetchCategories();
@@ -38,19 +39,21 @@ const ProductForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axiosInstance.post("/api/products", formData); // Use the axios instance
+      const response = await axiosInstance.post("/api/products", formData);
       setSuccess("Product added successfully!");
       setError(null);
       setFormData({
         name: "",
         price: "",
         description: "",
-        imageUrl: "",
         stockQuantity: "",
         averageRating: "",
         availability: "",
         categoryId: "",
       });
+      // Navigate to image upload page with the new product's ID
+      const productId = response.data.id; // Assuming the ID is returned in the response
+      navigate(`/upload-image/${productId}`);
     } catch (err) {
       setError("Failed to add product. Please try again.");
       setSuccess(null);
@@ -94,19 +97,6 @@ const ProductForm = () => {
             name="description"
             className={styles.input}
             value={formData.description}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-        {/* Image URL Field */}
-        <div className={styles.formGroup}>
-          <label className={styles.label}>Image URL</label>
-          <input
-            type="text"
-            name="imageUrl"
-            className={styles.input}
-            value={formData.imageUrl}
             onChange={handleChange}
             required
           />

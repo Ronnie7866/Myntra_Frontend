@@ -15,6 +15,7 @@ import CategoryForm from "./components/auth/admin/products/CategoryForm.jsx";
 import InventoryForm from "./components/auth/admin/products/InventoryForm.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
 import AdminDashboard from "./components/auth/admin/adminDashboard/AdminDashboard.jsx";
+import ImageUploadForm from "./components/auth/admin/products/ImageUploadForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute requireRole={"ADMIN"}>
             <InventoryForm />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/upload-image/:productId",
+        element: (
+          <PrivateRoute requireRole={"ADMIN"}>
+            <ImageUploadForm />
           </PrivateRoute>
         ),
       },

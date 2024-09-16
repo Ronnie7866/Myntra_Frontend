@@ -13,8 +13,8 @@ export default function BagSummary() {
   let totalDiscount = 0;
 
   finalItems.forEach((bagItem) => {
-    totalMRP += bagItem.originalPrice;
-    totalDiscount += bagItem.originalPrice - bagItem.currentPrice;
+    totalMRP += bagItem.price;
+    totalDiscount += bagItem.price - bagItem.price;
   });
 
   let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
