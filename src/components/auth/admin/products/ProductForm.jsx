@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductForm.module.css";
-import axiosInstance from "../../../utils/api.js";
+import axiosInstance from "../../../../utils/api";
 import { useNavigate } from "react-router-dom"; // Import for navigation after product creation
 
 const ProductForm = () => {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./CategoryForm.module.css";
-import axiosInstance from "../../../utils/api.js";
+import axiosInstance from "../../../../utils/api";
 
 const CategoryForm = () => {
   const [categoryData, setCategoryData] = useState({

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./ImageUploadForm.module.css";
-import axiosInstance from "../../../utils/api.js";
+import axiosInstance from "../../../../utils/api";
 import { useParams } from "react-router-dom";
 
 const ImageUploadForm = () => {

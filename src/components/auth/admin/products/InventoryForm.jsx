@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styles from "./InventoryForm.module.css";
-import axiosInstance from "../../../utils/api.js"; // Assuming you're using CSS modules
+import axiosInstance from "../../../../utils/api"; // Assuming you're using CSS modules
 
 const InventoryForm = () => {
   const [formData, setFormData] = useState({
@@ -37,7 +37,7 @@ const InventoryForm = () => {
     const { productId, quantity } = formData;
     try {
       await axiosInstance.post(
-        `/api/inventory/${Number(productId)}?stock=${Number(quantity)}`,
+        `/api/inventory/${Number(productId)}?stock=${Number(quantity)}`
       ); // Send inventory data to backend
       setSuccess("Inventory updated successfully!");
       setError(null);

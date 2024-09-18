@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import styles from "./Signup.module.css";
-import axios from "axios"; // Import CSS module
+import axios from "axios";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
+import { useNavigate } from "react-router-dom";
+import { showSuccessToast, showErrorToast } from "../../../utils/toastify";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,8 +16,8 @@ const Signup = () => {
     password: "",
   });
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
+  const [loading, setLoading] = useState(false); // State for spinner
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +27,7 @@ const Signup = () => {
   const handleGoogleLogin = () => {
     window.location.href = "http://localhost:8080/oauth2/authorization/google";
   };
+
   const handleGithubLogin = () => {
     window.location.href = "http://localhost:8080/oauth2/authorization/github";
   };
@@ -30,8 +35,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setErrorMessage(""); // Clear any previous error messages
-    setSuccessMessage(""); // Clear any previous success messages
+    setLoading(true); // Start loading when the form is submitted
 
     try {
       const response = await axios.post(
@@ -39,16 +43,37 @@ const Signup = () => {
         formData,
         {
           "Content-Type": "application/json",
-        },
+        }
       );
 
-      // save the token in local storage
+      // Save the token in local storage
       localStorage.setItem("token", response.data.token);
 
-      setSuccessMessage("Registration successfully!");
+      // Display success toast
+      showSuccessToast("Registration successful!");
+      navigate("/");
     } catch (error) {
-      console.error(error);
-      setErrorMessage("Registration failed!");
+      // Check if error response exists
+      if (error.response) {
+        if (error.response.status === 409) {
+          // Handle duplicate entry error
+          showErrorToast("User already registered! Please log in.");
+        } else if (error.response.status === 500) {
+          // Handle internal server error
+          const errorMessage =
+            error.response.data.detail ||
+            "An error occurred. Please try again.";
+          showErrorToast(errorMessage);
+        } else {
+          // Handle other errors
+          showErrorToast("Registration failed! Please try again.");
+        }
+      } else {
+        // Handle network or other unexpected errors
+        showErrorToast("An unexpected error occurred. Please try again.");
+      }
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -116,14 +141,20 @@ const Signup = () => {
           />
         </div>
 
-        <button type="submit" className={styles.submitButton}>
-          Register
+        <button
+          type="submit"
+          className={styles.submitButton}
+          disabled={loading}
+        >
+          {loading ? "Submitting..." : "Register"}
         </button>
       </form>
+
       <div className={styles.OAuthButtonContainer}>
         <button
           className={`${styles.button} ${styles.googleButton}`}
           onClick={handleGoogleLogin}
+          disabled={loading}
         >
           <FcGoogle />
           Login with Google
@@ -131,11 +162,15 @@ const Signup = () => {
         <button
           className={`${styles.button} ${styles.githubButton}`}
           onClick={handleGithubLogin}
+          disabled={loading}
         >
           <FaGithub />
           Login with Github
         </button>
       </div>
+
+      {/* Toastify container */}
+      <ToastContainer position="top-right" autoClose={5000} hideProgressBar />
     </div>
   );
 };
