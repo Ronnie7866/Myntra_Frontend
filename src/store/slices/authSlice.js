@@ -67,7 +67,6 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.user.role = action.payload.userDTO.role;
         state.error = null;
-        console.log("data from backend: ", action.payload);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.isLoading = false;

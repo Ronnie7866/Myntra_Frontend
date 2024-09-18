@@ -2,13 +2,12 @@ import { useDispatch } from "react-redux";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { bagActions } from "../store/slices/bagSlice.js";
 
+const dispatch = useDispatch();
 export default function BagItem({ item }) {
   const dispatch = useDispatch();
   const handleRemoveItem = () => {
     dispatch(bagActions.removeFromBag(item.id));
   };
-
-  console.log("ITEMS IN BAG ITEM: ", item);
 
   return (
     <div className="bag-item-container">

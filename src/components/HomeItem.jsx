@@ -3,6 +3,7 @@ import { bagActions } from "../store/slices/bagSlice.js";
 import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function HomeItem({ item }) {
   const [imageURL, setImageURL] = useState("");
@@ -15,25 +16,26 @@ export default function HomeItem({ item }) {
     const fetchProductImage = async () => {
       try {
         // fetch the image filename from backend
-        const response = await fetch(`http://localhost:8080/api/products`);
+        const response = await fetch(
+          `http://localhost:8080/api/products/${item.id}`
+        );
         if (!response.ok) {
           throw new Error("Image filename not found");
         }
-        const products = await response.json();
+        const product = await response.json();
+        const fileName = product.imageURL;
 
-        const imageURL = products
-          .map((product) => product.imageURL)
-          .filter((url) => url !== null);
-
-        products.forEach((p) => console.log("imageURL : " + p.imageURL));
-
-        //const fileName = await response.text();
-        // console.log(fileName);
-        // construct the image URL
-        // setImageURL(`http://localhost:8080/products/images/${fileName}`);
-        setImageURL(imageURL);
+        // Make another request to get the full URL from the backend
+git add .        const imageResponse = await fetch(
+          `http://localhost:8080/api/s3/${fileName}`
+        );
+        if (!imageResponse.ok) {
+          throw new Error("Image not found");
+        }
+        const fullImageUrl = await imageResponse.text(); // Expecting backend to return the URL as plain text
+        setImageURL(fullImageUrl); // Set the full image URL in state
       } catch (error) {
-        // console.log("Error fetching product image:", error);
+        console.error("Error fetching product image:", error);
       }
     };
     fetchProductImage();
@@ -46,17 +48,12 @@ export default function HomeItem({ item }) {
   const handleRemove = () => {
     dispatch(bagActions.removeFromBag(item.id));
   };
+  console.log(imageURL);
 
   return (
     <>
       <div className="item-container">
-        <img
-          className="item-image"
-          src={`/images/${item.imageURL}`}
-          // src="file:///D:/Project/E-Commerce/Backend/uploads/mandir.png"
-          //src={"/images/mandir.png"}
-          alt="item image"
-        />
+        <img className="item-image" src={imageURL} alt="item image" />
         <div className="rating">
           {/*{item.rating.stars} ⭐ | {item.rating.count}*/}
         </div>

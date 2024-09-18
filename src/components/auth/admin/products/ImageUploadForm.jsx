@@ -25,7 +25,7 @@ const ImageUploadForm = () => {
     formData.append("productId", productId);
 
     try {
-      await axiosInstance.post("/api/images/upload", formData, {
+      await axiosInstance.post("/api/s3", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
