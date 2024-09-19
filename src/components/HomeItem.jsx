@@ -3,48 +3,53 @@ import { bagActions } from "../store/slices/bagSlice.js";
 import { IoMdAdd } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { fetchProductImage } from "../store/slices/imageSlice.js";
 
 export default function HomeItem({ item }) {
-  const [imageURL, setImageURL] = useState("");
+  // const [imageURL, setImageURL] = useState("");
   const bagItems = useSelector((store) => store.bag);
+  const imageURL = useSelector((store) => store.images[item.id]);
   const elementFound = bagItems.indexOf(item.id) >= 0; // returns -1 if element not found
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchProductImage = async () => {
-      try {
-        // fetch the image filename from backend
-        const response = await fetch(
-          `http://localhost:8080/api/products/${item.id}`
-        );
-        if (!response.ok) {
-          throw new Error("Image filename not found");
-        }
-        const product = await response.json();
-        const fileName = product.imageURL;
+    // if image is not is the store only then fetch it
+    if (!imageURL) {
+      dispatch(fetchProductImage(item.id));
+    }
+  }, [item.id, imageURL, dispatch]);
 
-        // Make another request to get the full URL from the backend
-git add .        const imageResponse = await fetch(
-          `http://localhost:8080/api/s3/${fileName}`
-        );
-        if (!imageResponse.ok) {
-          throw new Error("Image not found");
-        }
-        const fullImageUrl = await imageResponse.text(); // Expecting backend to return the URL as plain text
-        setImageURL(fullImageUrl); // Set the full image URL in state
-      } catch (error) {
-        console.error("Error fetching product image:", error);
-      }
-    };
-    fetchProductImage();
-  }, [item.id]);
+  // useEffect(() => {
+  //   const fetchProductImage = async () => {
+  //     try {
+  //       // fetch the image filename from backend
+  //       const response = await fetch(
+  //         `http://localhost:8080/api/products/${item.id}`
+  //       );
+  //       if (!response.ok) {
+  //         throw new Error("Image filename not found");
+  //       }
+  //       const product = await response.json();
+  //       const fileName = product.imageURL;
 
-  const handleAddToBag = () => {
-    dispatch(bagActions.addToBag(item.id));
-  };
+  //       // Make another request to get the full URL from the backend
+  //       const imageResponse = await fetch(
+  //         `http://localhost:8080/api/s3/${fileName}`
+  //       );
+  //       if (!imageResponse.ok) {
+  //         throw new Error("Image not found");
+  //       }
+  //       const fullImageUrl = await imageResponse.text(); // Expecting backend to return the URL as plain text
+  //       setImageURL(fullImageUrl); // Set the full image URL in state
+  //     } catch (error) {
+  //       console.error("Error fetching product image:", error);
+  //     }
+  //   };
+  //   fetchProductImage();
+  // }, [item.id]);
 
+  const handleAddToBag = () => dispatch(bagActions.addToBag(item.id));
   const handleRemove = () => {
     dispatch(bagActions.removeFromBag(item.id));
   };
