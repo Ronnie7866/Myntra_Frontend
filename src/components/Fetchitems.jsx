@@ -23,7 +23,7 @@ const FetchItems = () => {
       })
       .catch((error) => {
         if (error.name === "AbortError") {
-          console.log("Fetch aborted");
+          console.log("");
         } else {
           dispatch(fetchStatusActions.markFetchingFailed());
         }

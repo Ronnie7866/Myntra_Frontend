@@ -12,6 +12,8 @@ const ProductForm = () => {
     averageRating: "",
     availability: "",
     categoryId: "",
+    size:"",
+    color: "",
   });
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState(null);
@@ -50,6 +52,8 @@ const ProductForm = () => {
         averageRating: "",
         availability: "",
         categoryId: "",
+        size: "",
+        color: "",
       });
       // Navigate to image upload page with the new product's ID
       const productId = response.data.id; // Assuming the ID is returned in the response

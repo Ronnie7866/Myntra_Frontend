@@ -4,6 +4,7 @@ import { FaShoppingBag } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileCard from "./ProfileCard";
+import SearchBar from "../SearchBar";
 
 export default function Header() {
   const bag = useSelector((store) => store.bag);
@@ -38,13 +39,7 @@ export default function Header() {
           Studio <sup>New</sup>
         </a>
       </nav>
-      <div className="search_bar">
-        <span className="material-symbols-outlined search_icon">search</span>
-        <input
-          className="search_input"
-          placeholder="Search for products, brands and more"
-        />
-      </div>
+      <SearchBar />
       <div className="action_bar">
         {/* Profile Container with hover detection */}
         <div
