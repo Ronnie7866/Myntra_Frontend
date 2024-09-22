@@ -1,17 +1,27 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBinFill } from "react-icons/ri";
 import { bagActions } from "../store/slices/bagSlice.js";
+import { useEffect } from "react";
+import { fetchProductImage } from "../store/slices/imageSlice.js";
 
 export default function BagItem({ item }) {
   const dispatch = useDispatch();
+  const imageURL = useSelector((store) => store.images[item.id]);
   const handleRemoveItem = () => {
-    dispatch(bagActions.removeFromBag(item.id));
+    dispatch(bagActions.removeFromBag(item.id.toString()));
   };
+
+  useEffect(() => {
+    // if image is not is the store only then fetch it
+    if (!imageURL) {
+      dispatch(fetchProductImage(item.id));
+    }
+  }, [item.id, imageURL, dispatch]);
 
   return (
     <div className="bag-item-container">
       <div className="item-left-part">
-        <img className="bag-item-img" src={`/images/${item.imageURL}`} />
+        <img className="bag-item-img" src={imageURL} />
       </div>
       <div className="item-right-part">
         <div className="company">{item.brand}</div>
@@ -38,4 +48,5 @@ export default function BagItem({ item }) {
       </div>
     </div>
   );
-}
+} 
+

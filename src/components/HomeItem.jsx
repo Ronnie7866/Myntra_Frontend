@@ -22,6 +22,7 @@ export default function HomeItem({ item }) {
   }, [item.id, imageURL, dispatch]);
 
   const handleAddToBag = () => dispatch(bagActions.addToBag(item.id));
+
   const handleRemove = () => {
     dispatch(bagActions.removeFromBag(item.id));
   };

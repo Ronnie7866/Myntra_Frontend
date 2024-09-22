@@ -1,0 +1,27 @@
+.carouselContainer {
+  width: 100vw;            /* Full width of the viewport */
+  height: 80vh;            /* 80% of the viewport height */
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;      /* Ensure positioning for the legend */
+}
+
+.carouselImage {
+  width: 100vw;            /* Ensure full width for all images */
+  height: 80vh;            /* Set height to 80% of the viewport */
+  object-fit: cover;       /* Maintain aspect ratio, cropping if necessary */
+}
+
+.legend {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: white;
+  font-size: 1.5rem;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.5);  /* Semi-transparent background for readability */
+  padding: 10px;
+  border-radius: 5px;
+}
+

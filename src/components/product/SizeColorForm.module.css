@@ -1,0 +1,79 @@
+/* Container styles */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+  }
+  
+  /* Label styles */
+  .form-label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #424242;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  /* Input field styles */
+  .form-input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s ease-in-out;
+    background-color: #f9f9f9;
+  }
+  
+  /* Focus effect on input */
+  .form-input:focus {
+    border-color: #ff3e6c;
+    outline: none;
+    background-color: #fff;
+  }
+  
+  /* Button styles */
+  .form-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #ff3e6c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+  }
+  
+  /* Hover and focus effects on button */
+  .form-button:hover,
+  .form-button:focus {
+    background-color: #e7355b;
+    transform: translateY(-2px);
+  }
+  
+  /* Input and button hover animation */
+  .form-input,
+  .form-button {
+    transition: all 0.3s ease-in-out;
+  }
+  
+  /* Container hover effect */
+  .form-container:hover .form-label {
+    color: #ff3e6c;
+  }
+  
+  /* Button active state */
+  .form-button:active {
+    background-color: #c52949;
+    transform: translateY(0);
+  }
+  

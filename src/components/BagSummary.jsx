@@ -1,11 +1,16 @@
 import { useSelector } from "react-redux";
 
 export default function BagSummary() {
+  // this is returning String
   const bagItemIds = useSelector((state) => state.bag);
+
+  // this is returning Number
 
   const items = useSelector((state) => state.items);
 
-  const finalItems = items.filter((item) => bagItemIds.includes(item.id));
+  const finalItems = items.filter((item) =>
+    bagItemIds.includes(item.id.toString())
+  );
 
   const CONVENIENCE_FEES = 99;
   let totalItem = bagItemIds.length;

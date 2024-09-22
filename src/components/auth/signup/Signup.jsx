@@ -149,7 +149,6 @@ const Signup = () => {
           {loading ? "Submitting..." : "Register"}
         </button>
       </form>
-
       <div className={styles.OAuthButtonContainer}>
         <button
           className={`${styles.button} ${styles.googleButton}`}
@@ -168,9 +167,6 @@ const Signup = () => {
           Login with Github
         </button>
       </div>
-
-      {/* Toastify container */}
-      <ToastContainer position="top-right" autoClose={5000} hideProgressBar />
     </div>
   );
 };

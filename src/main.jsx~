@@ -65,7 +65,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/upload-image/:id",
+        path: "/upload-image/:productId",
         element: (
           <PrivateRoute requireRole={"ADMIN"}>
             <ImageUploadForm />

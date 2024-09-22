@@ -50,9 +50,6 @@ const ProductPage = () => {
         const colorsData = await colorsResponse.json();
         setSizes(sizesData);
         setColors(colorsData);
-        console.log("Fetching Color and size");
-        console.log(sizes);
-        console.log(colors);
       } catch (error) {
         console.error("Failed to fetch sizes or colors:", error);
       }
@@ -70,44 +67,6 @@ const ProductPage = () => {
         quantity,
       })
     );
-    console.log("Added to cart:", {
-      product: product.name,
-      size: selectedSize,
-      color: selectedColor,
-      quantity,
-    });
-  };
-
-  const addSize = async (newSize) => {
-    try {
-      const response = await fetch("http://localhost:8080/api/sizes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: newSize }),
-      });
-      const data = await response.json();
-      setSizes([...sizes, data]);
-    } catch (error) {
-      console.error("Failed to add size:", error);
-    }
-  };
-
-  const addColor = async (newColor) => {
-    try {
-      const response = await fetch("http://localhost:8080/api/colors", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ name: newColor }),
-      });
-      const data = await response.json();
-      setColors([...colors, data]);
-    } catch (error) {
-      console.error("Failed to add color:", error);
-    }
   };
 
   if (!product) {
@@ -229,7 +188,7 @@ const ProductPage = () => {
                         setShowColors(false);
                       }}
                     >
-                      {colorObj.name22}
+                      {colorObj.name}
                     </div>
                   ))}
                 </motion.div>
