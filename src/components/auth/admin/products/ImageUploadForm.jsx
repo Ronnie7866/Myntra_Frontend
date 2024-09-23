@@ -7,7 +7,7 @@ const ImageUploadForm = () => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
-  const { productId } = useParams(); // extract the productId form the url
+  const { id } = useParams(); // extract the productId form the url
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -22,7 +22,7 @@ const ImageUploadForm = () => {
 
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("productId", productId);
+    formData.append("productId", id);
 
     try {
       await axiosInstance.post("/api/s3", formData, {
