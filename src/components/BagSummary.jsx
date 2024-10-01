@@ -1,16 +1,15 @@
 import { useSelector } from "react-redux";
 
 export default function BagSummary() {
-  // this is returning String
+  // This should return an array of bag item IDs, assuming it's stored as an array in the bag slice.
   const bagItemIds = useSelector((state) => state.bag);
 
-  // this is returning Number
-
+  // This should return an array of item objects containing the necessary fields (id, price, discountedPercentage, etc.)
   const items = useSelector((state) => state.items);
 
-  const finalItems = items.filter((item) =>
-    bagItemIds.includes(item.id.toString())
-  );
+  // Filter items to find those in the bag
+  const finalItems = items.filter((item) => bagItemIds.includes(item.id));
+  console.log(finalItems);
 
   const CONVENIENCE_FEES = 99;
   let totalItem = bagItemIds.length;
@@ -19,38 +18,43 @@ export default function BagSummary() {
 
   finalItems.forEach((bagItem) => {
     totalMRP += bagItem.price;
-    totalDiscount += bagItem.price - bagItem.price;
+
+    // Calculate the discounted amount
+    const discountAmount = (bagItem.price * (bagItem.discountedPercentage || 0)) / 100;
+    totalDiscount += discountAmount;
+
+    console.log("Discount for item", bagItem.id, "is", discountAmount);
   });
 
   let finalPayment = totalMRP - totalDiscount + CONVENIENCE_FEES;
 
   return (
-    <div className="bag-summary">
-      <div className="bag-details-container">
-        <div className="price-header">PRICE DETAILS ({totalItem} Items)</div>
-        <div className="price-item">
-          <span className="price-item-tag">Total MRP</span>
-          <span className="price-item-value">₹{totalMRP}</span>
-        </div>
-        <div className="price-item">
-          <span className="price-item-tag">Discount on MRP</span>
-          <span className="price-item-value priceDetail-base-discount">
-            -₹{totalDiscount}
+      <div className="bag-summary">
+        <div className="bag-details-container">
+          <div className="price-header">PRICE DETAILS ({totalItem} Items)</div>
+          <div className="price-item">
+            <span className="price-item-tag">Total MRP</span>
+            <span className="price-item-value">₹{totalMRP.toFixed(2)}</span>
+          </div>
+          <div className="price-item">
+            <span className="price-item-tag">Discount on MRP</span>
+            <span className="price-item-value priceDetail-base-discount">
+            -₹{totalDiscount.toFixed(2)}
           </span>
+          </div>
+          <div className="price-item">
+            <span className="price-item-tag">Convenience Fee</span>
+            <span className="price-item-value">₹{CONVENIENCE_FEES}</span>
+          </div>
+          <hr />
+          <div className="price-footer">
+            <span className="price-item-tag">Total Amount</span>
+            <span className="price-item-value">₹{finalPayment.toFixed(2)}</span>
+          </div>
         </div>
-        <div className="price-item">
-          <span className="price-item-tag">Convenience Fee</span>
-          <span className="price-item-value">₹99</span>
-        </div>
-        <hr />
-        <div className="price-footer">
-          <span className="price-item-tag">Total Amount</span>
-          <span className="price-item-value">₹{finalPayment}</span>
-        </div>
+        <button className="btn-place-order">
+          <div className="css-xjhrni">PLACE ORDER</div>
+        </button>
       </div>
-      <button className="btn-place-order">
-        <div className="css-xjhrni">PLACE ORDER</div>
-      </button>
-    </div>
   );
 }

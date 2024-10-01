@@ -19,6 +19,7 @@ import ImageUploadForm from "./components/auth/admin/products/ImageUploadForm.js
 import ProductPage from "./components/product/ProductPage.jsx";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import SizeColorForm from "./components/product/SizeColorForm.jsx";
+import ProfileForm from "./components/profile/ProfileForm.jsx";
 
 const router = createBrowserRouter([
   {
@@ -79,6 +80,10 @@ const router = createBrowserRouter([
       {
         path: "/size-color-form/:id",
         element: <SizeColorForm />,
+      },
+      {
+        path: "/profile-form",
+        element: <ProfileForm />,
       },
     ],
   },

@@ -1,0 +1,115 @@
+.itemsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center align items */
+    width: 80%;
+    margin: 40px auto; /* Center container */
+}
+
+.itemContainer {
+    width: calc(20% - 20px); /* 5 items per row with margin adjustment */
+    margin: 10px;
+    border-radius: 10px; /* Rounded corners */
+    overflow: hidden; /* Round corners for image */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    transition: transform 0.3s, box-shadow 0.3s; /* Animation on hover */
+    background-color: #ffffff; /* White background for clean look */
+    position: relative; /* For positioning effects */
+    display: flex; /* Enable flexbox */
+    flex-direction: column; /* Stack elements vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    height: 390px; /* Fixed height for uniformity */
+}
+
+.itemImage {
+    width: 100%;
+    height: 250px; /* Increased height for uniformity */
+    object-fit: cover; /* Cover the image */
+    transition: transform 0.3s; /* Smooth zoom effect */
+}
+
+.itemContainer:hover .itemImage {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+}
+
+.rating {
+    font-size: 14px;
+    font-weight: 700;
+    color: #ff905a; /* Color for rating */
+    margin: 8px 0; /* Margin for spacing */
+}
+
+/* No text decoration for links and elements */
+.companyName,
+.itemName,
+.price {
+    margin: 0; /* Remove default margin */
+    color: #282c3f; /* Uniform color */
+    font-size: 16px; /* Adjust font size */
+    font-weight: 600; /* Stronger font weight for brand and item names */
+    line-height: 1.2; /* Improved line height */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; /* No wrap for clean look */
+    text-decoration: none; /* Remove underline */
+    text-align: center; /* Center align text */
+}
+
+/* For link elements specifically */
+a {
+    text-decoration: none; /* Remove underline from all links */
+}
+
+.price {
+    margin-top: 10px;
+    font-size: 16px; /* Slightly larger for emphasis */
+    line-height: 1.4; /* Improve spacing */
+}
+
+.currentPrice {
+    font-weight: 700;
+}
+
+.originalPrice {
+    text-decoration: line-through;
+    color: #7e818c;
+    font-weight: 400;
+    margin-left: 5px;
+    font-size: 14px;
+}
+
+.discount {
+    color: #ff905a;
+    font-weight: 400;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.btnAddBag {
+    margin-top: 10px;
+    font-size: 16px;
+    width: 100%;
+    background-color: #ff3f6c; /* Myntra button color */
+    border: none;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white; /* White text */
+    font-weight: 600; /* Bold button text */
+    transition: background-color 0.3s, transform 0.3s; /* Animation for button */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.btnAddBag:hover {
+    background-color: #ff2a4d; /* Darker Myntra red on hover */
+    transform: translateY(-2px); /* Lift effect on hover */
+}
+
+.btn-danger {
+    background-color: #f44336; /* Red color for remove button */
+}
+
+.btn-danger:hover {
+    background-color: #e53935; /* Darker red on hover */
+}

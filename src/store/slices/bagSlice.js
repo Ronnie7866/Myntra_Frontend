@@ -24,7 +24,7 @@ const saveState = (state) => {
 // Create Slice
 const bagSlice = createSlice({
   name: "bag",
-  initialState: loadState(), // Load the initail state from localStrage
+  initialState: loadState(), // Load the initial state from localStorage
   reducers: {
     addToBag: (state, action) => {
       state.push(action.payload);

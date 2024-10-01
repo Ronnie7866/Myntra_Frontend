@@ -9,7 +9,12 @@ export const loginUser = createAsyncThunk(
         "/api/auth/authenticate",
         credentials,
       );
-      localStorage.setItem("token", response.data.token);
+
+      const { token, userDTO } = response.data;
+
+      // Store both token and userDTO in localStorage
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify(userDTO));
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.response.data);
@@ -34,25 +39,34 @@ export const logoutUser = createAsyncThunk("auth/logoutUser", async () => {
   window.location.href = "/login";
 });
 
+const storedUser = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : {
+  firstName: "",
+  lastName: "",
+  email: "",
+  role: "",
+  addressList: [],
+  defaultPhoneNumber: "",
+};
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
-    user: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      role: "",
-      addressList: [],
-      defaultPhoneNumber: "",
-    },
-    token: localStorage.getItem("token") || null,
+    user: storedUser, // Initialise user from localStorage
+    token: localStorage.getItem("token"),
+    isAuthenticated: !!localStorage.getItem("token"),
     isLoading: false,
-    isAuthenticated: false,
     error: null,
   },
   reducers: {
+
     clearError: (state) => {
       state.error = null;
+    },
+    // Add the setAuthenticatedUser reducer
+    setAuthenticatedUser: (state, action) => {
+      state.user = action.payload.userDTO;
+      state.token = action.payload.token;
+      state.isAuthenticated = true;
     },
   },
   extraReducers: (builder) => {
@@ -96,9 +110,10 @@ const authSlice = createSlice({
         state.isAuthenticated = false;
         state.token = null;
         localStorage.removeItem("token");
+        localStorage.removeItem("user");
       });
   },
 });
 
-export const { clearError } = authSlice.actions;
+export const { clearError, setAuthenticatedUser } = authSlice.actions;
 export default authSlice;

@@ -4,13 +4,13 @@ import { Navigate } from "react-router-dom";
 
 // PrivateRoute with Role Checking
 const PrivateRoute = ({ children, requireRole }) => {
-  const { token, user } = useSelector((state) => state.auth);
+  const { token, user, isAuthenticated } = useSelector((state) => state.auth);
 
-  // Redirect if not authenticated or role doesn't match
-  if (!token || user.role !== requireRole) {
+  if (!isAuthenticated || user.role !== requireRole) {
     return <Navigate to="/login" />;
   }
 
+  // If everything is valid, render the children
   return children;
 };
 
