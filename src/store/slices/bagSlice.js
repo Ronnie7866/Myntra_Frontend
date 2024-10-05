@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from "@reduxjs/toolkit";
 
 // Load initial bag state from localStorage(or use an empty array if nothing is found)
 const loadState = () => {
@@ -22,16 +22,19 @@ const saveState = (state) => {
 };
 
 // Create Slice
+// Hold product ids
 const bagSlice = createSlice({
   name: "bag",
-  initialState: loadState(), // Load the initial state from localStorage
+  initialState: loadState(),
   reducers: {
     addToBag: (state, action) => {
       state.push(action.payload);
       saveState(state);
     },
     removeFromBag: (state, action) => {
-      return state.filter((itemId) => itemId !== action.payload);
+      const updatedState = state.filter((itemId) => itemId !== action.payload);
+      saveState(updatedState);
+      return updatedState;
     },
   },
 });

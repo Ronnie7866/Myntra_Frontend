@@ -15,15 +15,15 @@ const HomeCarousel = () => {
       <div>
         <img
           className={styles.carouselImage}
-          src="/images/saree1.jpg"
+          src="/images/1.avif"
           alt="Slide 1"
         />
-        <p className={styles.legend}>Latest Blue Saree</p>
+        <p className={styles.legend}>Upto 40% OFF</p>
       </div>
       <div>
         <img
           className={styles.carouselImage}
-          src="/images/saree2.webp"
+          src="/images/2.jpg"
           alt="Slide 2"
         />
         <p className={styles.legend}>Explore collection</p>
@@ -31,7 +31,7 @@ const HomeCarousel = () => {
       <div>
         <img
           className={styles.carouselImage}
-          src="/images/saree3.jpg"
+          src="/images/3.jpg"
           alt="Slide 3"
         />
         <p className={styles.legend}>Asthetic look</p>

@@ -20,6 +20,7 @@ import ProductPage from "./components/product/ProductPage.jsx";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import SizeColorForm from "./components/product/SizeColorForm.jsx";
 import ProfileForm from "./components/profile/ProfileForm.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
 const router = createBrowserRouter([
   {
