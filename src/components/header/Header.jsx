@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import { FcBusinesswoman, FcLike } from "react-icons/fc";
 import { FaShoppingBag } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import {Link, NavLink, useNavigate} from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileCard from "./ProfileCard";
-import SearchBar from "../SearchBar";
+import SearchBar from "../common/SearchBar.jsx";
 
 export default function Header() {
+
+  const user = useSelector(state => state.auth);
+  const bagState = useSelector((store) => store.bag);
+  const navigate = useNavigate();
+  const isAuthenticated = user.isAuthenticated
+
   const bag = useSelector((store) => store.bag);
   const [isProfileCardVisible, setIsProfileCardVisible] = useState(false);
+  const bagItemsCount = bagState?.items?.length || 0;
+
+  const handleBagClick = () => {
+    if (isAuthenticated)  return navigate("/bag");
+    return navigate("/login")
+  }
 
   const handleMouseEnter = () => {
     setIsProfileCardVisible(true);
@@ -64,11 +76,11 @@ export default function Header() {
           <span className="action_name">Wishlist</span>
         </div>
 
-        <Link className="action_container" to="bag">
+        <div onClick={handleBagClick} className="action_container">
           <FaShoppingBag />
           <span className="action_name">Bag</span>
-          <span className="bag-item-count">{bag.length}</span>
-        </Link>
+          <span className="bag-item-count">{bagItemsCount}</span>
+        </div>
       </div>
     </header>
   );

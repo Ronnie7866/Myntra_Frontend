@@ -1,9 +1,9 @@
 import Header from "../components/header/Header.jsx";
-import Footer from "../components/Footer.jsx";
+import Footer from "../components/common/Footer.jsx";
 import { Outlet } from "react-router-dom";
-import FetchItems from "../components/FetchItems.jsx";
+import FetchItems from "../components/common/Fetchitems.jsx";
 import { useSelector } from "react-redux";
-import Spinner from "../components/Spinner.jsx";
+import Spinner from "../components/common/Spinner.jsx";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer } from "react-toastify";
 import { useEffect } from "react";

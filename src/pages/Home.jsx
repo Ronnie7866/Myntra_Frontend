@@ -1,21 +1,33 @@
-import HomeCarousel from "../components/HomeCarousel.jsx";
-import HomeItem from "../components/HomeItem.jsx";
-import { useSelector } from "react-redux";
-import styles from "../components/HomeCarousel.module.css";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchHomeItems } from '../store/slices/itemsSlice';
+import HomeItem from '../components/home/HomeItem.jsx';
 
-export default function Home() {
-  const items = useSelector((store) => store.items);
+const Home = () => {
+  const dispatch = useDispatch();
+  const itemsState = useSelector(state => state.items);
+
+  useEffect(() => {
+    if (itemsState.status === 'idle') {
+      dispatch(fetchHomeItems());
+    }
+  }, [itemsState.status, dispatch]);
+
+  if (itemsState.status === 'loading') {
+    return <div>Loading...</div>;
+  }
+
+  if (itemsState.status === 'failed') {
+    return <div>Error: {itemsState.error}</div>;
+  }
 
   return (
-    <main>
-      <div className={styles.carouselContainer}>
-        <HomeCarousel />
-      </div>
-      <div className="items-container">
-        {items.map((item) => (
-          <HomeItem key={item.id} item={item} />
-        ))}
-      </div>
-    </main>
+    <div>
+      {itemsState.items && itemsState.items.map(item => (
+        <HomeItem key={item.id} item={item} />
+      ))}
+    </div>
   );
-}
+};
+
+export default Home;

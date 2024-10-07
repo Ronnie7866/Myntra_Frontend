@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
     margin: 0;
     padding: 0;
@@ -20,6 +24,7 @@ header {
 
 .logo_container {
     margin-left: 4%;
+    width: 120px;
 }
 
 .action_bar {

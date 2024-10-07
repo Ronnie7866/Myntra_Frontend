@@ -10,7 +10,7 @@ import { motion } from "framer-motion";
 import styles from "./ProductPage.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductImage } from "../../store/slices/imageSlice";
-import { bagActions } from "../../store/slices/bagSlice"; // Adjust import path as needed
+import { addToBag } from "../../store/slices/bagSlice"; // Adjust import path as needed
 
 const ProductPage = () => {
   const { id } = useParams(); // Get the product ID from the URL
@@ -61,7 +61,7 @@ const ProductPage = () => {
 
   const handleAddToCart = () => {
     dispatch(
-      bagActions.addToBag(id, {
+      addToBag(id, {
         size: selectedSize,
         color: selectedColor,
         quantity,

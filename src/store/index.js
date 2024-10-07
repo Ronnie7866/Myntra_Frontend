@@ -8,9 +8,9 @@ import imageSlice from "./slices/imageSlice.js";
 // Create Store
 const myntraStore = configureStore({
   reducer: {
-    items: itemsSlice.reducer, // Directly using the imported slice
+    items: itemsSlice, // Directly using the imported slice
     fetchStatus: fetchStatusSlice.reducer, // Directly using the imported slice
-    bag: bagSlice.reducer,
+    bag: bagSlice,
     auth: authSlice.reducer,
     images: imageSlice.reducer,
   },

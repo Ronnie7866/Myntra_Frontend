@@ -2,18 +2,17 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 function BagSummary() {
-  const bagItemIds = useSelector((state) => state.bag);
-  const items = useSelector((state) => state.items);
-
-  const finalItems = items.filter((item) => bagItemIds.includes(item.id));
+  const bagState = useSelector((state) => state.bag);
+  const items = bagState?.items || [];
 
   let totalMRP = 0;
   let totalDiscount = 0;
   const CONVENIENCE_FEES = 99;
 
-  finalItems.forEach((item) => {
-    totalMRP += item.price;
-    const discountAmount = (item.price * item.discountedPercentage) / 100;
+  items.forEach((item) => {
+    const product = item.product;
+    totalMRP += product.price * item.quantity;
+    const discountAmount = (product.price * product.discountedPercentage * item.quantity) / 100;
     totalDiscount += discountAmount;
   });
 
@@ -22,7 +21,7 @@ function BagSummary() {
   return (
     <div className="bag-summary">
       <div className="bag-details-container">
-        <div className="price-header">PRICE DETAILS ({bagItemIds.length} Items)</div>
+        <div className="price-header">PRICE DETAILS ({items.length} Items)</div>
         <div className="price-item">
           <span className="price-item-tag">Total MRP</span>
           <span className="price-item-value">₹{totalMRP.toFixed(2)}</span>

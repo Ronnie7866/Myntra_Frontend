@@ -8,19 +8,18 @@ import Bag from "./pages/Bag.jsx";
 import Home from "./pages/Home.jsx";
 import { Provider } from "react-redux";
 import myntraStore from "./store/index.js";
-import Signup from "./components/auth/signup/Signup.jsx";
-import LoginForm from "./components/auth/login/LoginForm.jsx";
-import ProductForm from "./components/auth/admin/products/ProductForm.jsx";
-import CategoryForm from "./components/auth/admin/products/CategoryForm.jsx";
-import InventoryForm from "./components/auth/admin/products/InventoryForm.jsx";
+import Signup from "./components/auth/Signup.jsx";
+import LoginForm from "./components/auth/LoginForm.jsx";
+import ProductForm from "./components/admin/ProductForm.jsx";
+import CategoryForm from "./components/admin/CategoryForm.jsx";
+import InventoryForm from "./components/admin/InventoryForm.jsx";
 import PrivateRoute from "./routes/PrivateRoute.jsx";
-import AdminDashboard from "./components/auth/admin/adminDashboard/AdminDashboard.jsx";
-import ImageUploadForm from "./components/auth/admin/products/ImageUploadForm.jsx";
+import AdminDashboard from "./components/admin/AdminDashboard.jsx";
+import ImageUploadForm from "./components/admin/ImageUploadForm.jsx";
 import ProductPage from "./components/product/ProductPage.jsx";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import SizeColorForm from "./components/product/SizeColorForm.jsx";
 import ProfileForm from "./components/profile/ProfileForm.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
 
 const router = createBrowserRouter([
   {

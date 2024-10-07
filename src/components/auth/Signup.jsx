@@ -6,7 +6,7 @@ import { FaGithub } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; // Import Toastify CSS
 import { useNavigate } from "react-router-dom";
-import { showSuccessToast, showErrorToast } from "../../../utils/toastify";
+import { showSuccessToast, showErrorToast } from "../../utils/toastify.js";
 
 const Signup = () => {
   const [formData, setFormData] = useState({

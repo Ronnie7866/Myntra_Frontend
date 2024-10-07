@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styles from "./ProductForm.module.css";
-import axiosInstance from "../../../../utils/api";
+import axiosInstance from "../../utils/api.js";
 import { useNavigate } from "react-router-dom";
-import { showErrorToast, showSuccessToast } from "../../../../utils/toastify.js";
+import { showErrorToast, showSuccessToast } from "../../utils/toastify.js";
 
 const ProductForm = () => {
   const [formData, setFormData] = useState({

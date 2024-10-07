@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../../../store/slices/authSlice.js";
+import { loginUser } from "../../store/slices/authSlice.js";
 import styles from "./LoginForm.module.css";
 import { Link, useNavigate } from "react-router-dom";
 

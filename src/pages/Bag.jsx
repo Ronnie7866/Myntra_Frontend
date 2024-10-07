@@ -1,44 +1,35 @@
-import BagSummary from "../components/BagSummary.jsx";
-import BagItem from "../components/BagItem.jsx";
-import {useDispatch, useSelector} from "react-redux";
-import {useEffect} from "react";
-import axiosInstance from "../utils/api.js";
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import BagSummary from "../components/bag/BagSummary.jsx";
+import BagItem from "../components/bag/BagItem.jsx";
+import { fetchCart } from "../store/slices/bagSlice.js";
 
 export default function Bag() {
   const dispatch = useDispatch();
-  const bagItems = useSelector((store) => store.bag);
-  const items = useSelector((store) => store.items);
-  const finalItems = items.filter((item) => bagItems.includes(item.id));
-  const user = useSelector((state) => state.auth);
-
+  const user = useSelector((state) => state.auth.user);
+  const userId = user?.id || 1; // Use 1 as default if user id is not available
+  const bagState = useSelector((state) => state.bag);
+  const items = bagState?.items || [];
+  const status = bagState?.status || 'idle';
+  const error = bagState?.error || null;
 
   useEffect(() => {
-    async function fetchCardItems() {
-      try {
-        const response = await axiosInstance.get(`/api/cart/getCartByUserId/1`);
+    dispatch(fetchCart(userId));
+  }, [dispatch, userId]);
 
-        const data = response.data;
-
-        console.log("DATA", data);
-      } catch (error) {
-        console.error("Error fetching cart:", error);
-      }
-    }
-
-    fetchCardItems();
-  }, [dispatch]);
-
+  if (status === 'loading') return <div>Loading...</div>;
+  if (status === 'failed') return <div>Error: {error}</div>;
 
   return (
     <main>
       <div className="bag-page">
         <div className="bag-items-container">
-          {finalItems.map((item) => (
-            <BagItem key={item.id} item={item}/>
+          {items.map((item) => (
+            <BagItem key={item.id} item={item.product} cartProductId={item.id} quantity={item.quantity} />
           ))}
         </div>
-        <BagSummary/>
+        <BagSummary />
       </div>
     </main>
   );
-};
+}

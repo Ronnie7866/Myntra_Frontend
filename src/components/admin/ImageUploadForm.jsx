@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./ImageUploadForm.module.css";
-import axiosInstance from "../../../../utils/api";
+import axiosInstance from "../../utils/api.js";
 import {useNavigate, useParams} from "react-router-dom";
-import {showErrorToast, showSuccessToast} from "../../../../utils/toastify.js";
+import {showErrorToast, showSuccessToast} from "../../utils/toastify.js";
 
 const ImageUploadForm = () => {
   const [file, setFile] = useState(null);
