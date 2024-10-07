@@ -39,17 +39,19 @@ export default function HomeItem({ item }) {
   return (
     <div className={styles.itemContainer}>
       <Link to={`product/${item.id}`} className={styles.link}>
-        <img className={styles.itemImage} src={imageURL} alt="item" />
-        <div className={styles.rating}>
-          {/* Display rating stars */}
-          {/* {item.rating.stars} ⭐ | {item.rating.count} reviews */}
-        </div>
-        <div className={styles.companyName}>{item.brand}</div>
-        <div className={styles.itemName}>{item.name}</div>
-        <div className={styles.price}>
-          <span className={styles.currentPrice}>Rs {item.price}</span>
-          <span className={styles.originalPrice}>Rs {item.originalPrice}</span>
-          <span className={styles.discount}>({item.discountedPercentage}% OFF)</span>
+        <img className={styles.itemImage} src={imageURL} alt={item.name}/>
+        <div className={styles.itemDetails}>
+          <div className={styles.rating}>
+            {/* Display rating stars */}
+            {/* {item.rating.stars} ⭐ | {item.rating.count} reviews */}
+          </div>
+          <div className={styles.companyName}>{item.brand}</div>
+          <div className={styles.itemName}>{item.name}</div>
+          <div className={styles.price}>
+            <span className={styles.currentPrice}>Rs {item.price}</span>
+            <span className={styles.originalPrice}>Rs {item.originalPrice}</span>
+            <span className={styles.discount}>({item.discountedPercentage}% OFF)</span>
+          </div>
         </div>
       </Link>
       {elementFound ? (
@@ -58,16 +60,16 @@ export default function HomeItem({ item }) {
           className={`${styles.btnAddBag} ${styles.btnDanger}`}
           onClick={handleRemove}
         >
-          <MdDeleteForever />
+          <MdDeleteForever/>
           Remove
         </button>
       ) : (
         <button
           type="button"
-          className={`${styles.btnAddBag} ${styles.btnSuccess}`}
+          className={styles.btnAddBag}
           onClick={handleAddToBag}
         >
-          <IoMdAdd />
+          <IoMdAdd/>
           Add to Bag
         </button>
       )}

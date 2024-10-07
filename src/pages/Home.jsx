@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchHomeItems } from '../store/slices/itemsSlice';
 import HomeItem from '../components/home/HomeItem.jsx';
+import styles from '../components/home/HomeItem.module.css';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,7 +23,7 @@ const Home = () => {
   }
 
   return (
-    <div>
+    <div className={styles.itemsContainer}>
       {itemsState.items && itemsState.items.map(item => (
         <HomeItem key={item.id} item={item} />
       ))}
